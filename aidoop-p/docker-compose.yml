@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  postgres:
+    image: aidoop/postgres-fd
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data/pgdata
+    ports:
+      - '5432:5432'
+
+  mongodb:
+    image: mongo:4.4.3
+    container_name: 'mongodb'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_DATABASE}
+    ports:
+      - "27017:27017"
+
+  app:
+    image: aidoop/aidoop-p
+    build: .
+    privileged: true
+    container_name: app
+    volumes:
+      - ./logs:/app/logs
+      - ./config.production.js:/app/config.production.js
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+      - mongodb

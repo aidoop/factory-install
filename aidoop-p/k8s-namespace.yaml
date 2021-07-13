@@ -1,0 +1,21 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: "development"
+  labels:
+    name: "development"
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: "production"
+  labels:
+    name: "production"
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: "test"
+  labels:
+    name: "test"
+---

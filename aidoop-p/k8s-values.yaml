@@ -1,0 +1,221 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: aidoop-p
+spec:
+  selector:
+    matchLabels:
+      app: aidoop-p
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: aidoop-p
+    spec:
+      volumes:
+      - name: venv-pv-storage
+        persistentVolumeClaim:
+          claimName: venv-pv-claim
+      - name: config
+        configMap:
+          name: config
+      containers:
+        - name: aidoop-p
+          image: aidoop/aidoop-p:latest
+          ports:
+          - containerPort: 3000
+          volumeMounts:
+          - name: venv-pv-storage
+            mountPath: /app/venv
+          - name: config
+            mountPath: /app/config.production.js
+            subPath: config.production.js
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: aidoop-p
+spec:
+  type: NodePort
+  selector:
+    app: aidoop-p
+  ports:
+    - port: 3000
+      nodePort: 30000
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: venv-pv
+  labels:
+    type: local
+spec:
+  storageClassName: venv
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/venv"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: venv-pv-claim
+spec:
+  storageClassName: venv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      db: postgres
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        db: postgres
+    spec:
+      volumes:
+      - name: postgres-pv-storage
+        persistentVolumeClaim:
+          claimName: postgres-pv-claim
+      containers:
+      - env:
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: prod-secrets
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: prod-secrets
+              key: POSTGRES_USER
+        image: postgres:13
+        imagePullPolicy: ""
+        name: db-aidoop-p
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgres-pv-storage
+      restartPolicy: Always
+      serviceAccountName: ""
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    db: postgres
+  name: postgres
+spec:
+  type: NodePort
+  ports:
+  - port: 5432
+    nodePort: 30001
+  selector:
+    db: postgres
+---            
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-pv
+  labels:
+    type: local
+spec:
+  storageClassName: postgres
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/postgres"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pv-claim
+spec:
+  storageClassName: postgres
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mosquitto
+spec:
+  selector:
+    matchLabels:
+      app: mosquitto
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+    spec:
+      volumes:
+      - name: mosquitto-pv-storage
+        persistentVolumeClaim:
+          claimName: mosquitto-pv-claim
+      containers:
+        - name: mosquitto
+          image: eclipse-mosquitto:1.6.12
+          ports:
+          - containerPort: 1883
+          volumeMounts:
+          - name: mosquitto-pv-storage
+            mountPath: /mnt/mosquitto
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mosquitto
+spec:
+  type: NodePort
+  selector:
+    app: mosquitto
+  ports:
+    - port: 1883
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mosquitto-pv
+  labels:
+    type: local
+spec:
+  storageClassName: mosquitto
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/mosquitto"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mosquitto-pv-claim
+spec:
+  storageClassName: mosquitto
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

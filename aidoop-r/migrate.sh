@@ -1,0 +1,1 @@
+docker exec -it aidoop-r npm run migration -- --mode=production
