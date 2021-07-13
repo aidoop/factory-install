@@ -16,7 +16,7 @@
 
     ```
     # install script for aidoop-r
-    curl -fsSL https://raw.githubusercontent.com/things-factory/things-factory/master/packages/aidoop-r/installer/install.sh | bash -s
+    curl -fsSL https://raw.githubusercontent.com/aidoop/factory-install/master/aidoop-r/install.sh | bash -s
     ```
 
   - run 'start.sh' to start aidoop-r and 'stop.sh' to stop the running applicaton.

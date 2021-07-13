@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   nginx:
     image: hatiolab/operato-nginx:latest
@@ -7,7 +7,6 @@ services:
     depends_on:
       - app
   app:
-    build: .
     container_name: aidoop-r
     image: aidoop/aidoop-r:latest
     privileged: true
@@ -34,7 +33,7 @@ services:
     volumes:
       - ./postgres_data:/var/lib/postgresql/data/pgdata
     ports:
-      - '55432:5432'
+      - "55432:5432"
   mosquitto:
     image: eclipse-mosquitto:1.6.12
     ports:

@@ -1,1 +1,1 @@
-curl -fsSL https://github.com/aidoop/factory/raw/main/packages/aidoop-r/installer/installer/install.sh | bash -s
+curl -fsSL https://raw.githubusercontent.com/aidoop/factory-install/master/aidoop-r/install.sh | bash -s
