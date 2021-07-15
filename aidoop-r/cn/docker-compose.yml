@@ -1,0 +1,42 @@
+version: "3"
+services:
+  nginx:
+    image: hatiolab/operato-nginx:latest
+    ports:
+      - ${HostPort}:80
+    depends_on:
+      - app
+  app:
+    container_name: aidoop-r
+    image: aidoop/aidoop-r:latest-cn
+    privileged: true
+    volumes:
+      - ./logs:/app/logs
+      - ./config.production.js:/app/config.production.js
+      - ./license.json:/app/license.json
+      # usb & display access for linux
+      #- /tmp/.X11-unix:/tmp/.X11-unix
+      #- /dev/bus/usb:/dev/bus/usb
+    # environment:
+    #   - DISPLAY=unix$DISPLAY
+    ports:
+      - 4000:3000
+    depends_on:
+      - postgres
+      - mosquitto
+  postgres:
+    image: postgres:13.2
+    container_name: db-aidoop-r
+    environment:
+      POSTGRES_PASSWORD: abcd1234
+      POSTGRES_USER: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data/pgdata
+    ports:
+      - "55432:5432"
+  mosquitto:
+    image: eclipse-mosquitto:1.6.12
+    ports:
+      - 1883:1883
+      - 9001:9001
