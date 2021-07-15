@@ -42,7 +42,7 @@ fi
 
 chmod u+x start.sh
 chmod u+x stop.sh
-chmod u+x upgrade.sh
+chmod u+x upgrade-cn.sh
 chmod u+x migrate.sh
 
 echo "HostPort=3000" > .env
