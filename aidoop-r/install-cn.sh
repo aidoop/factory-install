@@ -23,7 +23,7 @@ if [ -f "upgrade.sh" ] ; then
   echo "upgrade.sh exist"
 else
   echo "upgrade.sh create"
-  curl -O https://raw.githubusercontent.com/aidoop/factory-install/master/aidoop-r/upgrade.sh
+  curl -O https://raw.githubusercontent.com/aidoop/factory-install/master/aidoop-r/upgrade-cn.sh
 fi
 
 if [ -f "migrate.sh" ] ; then

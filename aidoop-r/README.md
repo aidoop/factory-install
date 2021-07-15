@@ -12,11 +12,15 @@
 - aidoop-r installation script
 
   - create a folder for the application and change directory to your folder.
-  - the script will download a& install aidoop-r
+  - the script will download & install aidoop-r
 
     ```
-    # install script for aidoop-r
     curl -fsSL https://raw.githubusercontent.com/aidoop/factory-install/master/aidoop-r/install.sh | bash -s
+    ```
+  - the script will download & install aidoop-r for china
+
+    ```
+    curl -fsSL https://raw.githubusercontent.com/aidoop/factory-install/master/aidoop-r/install-cn.sh | bash -s
     ```
 
   - run 'start.sh' to start aidoop-r and 'stop.sh' to stop the running applicaton.
