@@ -47,7 +47,7 @@ chmod u+x migrate.sh
 
 echo "HostPort=3000" > .env
 
-docker pull aidoop/aidoop-r:latest
+docker pull aidoop/aidoop-r:latest-cn
 
 docker pull hatiolab/operato-nginx:latest
 
