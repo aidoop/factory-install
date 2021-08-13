@@ -14,6 +14,7 @@ services:
       - ./logs:/app/logs
       - ./config.production.js:/app/config.production.js
       - ./license.json:/app/license.json
+      - ./tsconfig-base.json:/tsconfig-base.json
       # usb & display access for linux
       #- /tmp/.X11-unix:/tmp/.X11-unix
       #- /dev/bus/usb:/dev/bus/usb

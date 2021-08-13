@@ -1,10 +1,15 @@
-var licenseKey = require("./license").Key;
+try {
+  var licenseKey = require("./license").Key;
+} catch (e) {
+  var licenseKey = {};
+}
+
 module.exports = {
   protocol: "http",
   subdomain: "system",
   accessTokenCookieKey: "access_token.robotics",
   SECRET: "0xD58F835B69D207A76CC5F84a70a1D0d4C79dAC95", // temporary...
-  licenseKey: licenseKey,
+  licenseKey,
   email: {
     host: "smtp.office365.com", // your sender-email smtp host
     port: 587, // smtp server port
