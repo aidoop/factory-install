@@ -40,6 +40,20 @@ else
   curl -O https://raw.githubusercontent.com/aidoop/factory-install/master/aidoop-r/docker-compose.yml
 fi
 
+if [ -f "license.json" ] ; then
+  echo "license.json exist"
+else
+  echo "license.json create"
+  curl -O https://raw.githubusercontent.com/aidoop/factory-install/master/aidoop-r/license.json
+fi
+
+if [ -f "tsconfig-base.json" ] ; then
+  echo "tsconfig-base.json exist"
+else
+  echo "tsconfig-base.json create"
+  curl -O https://raw.githubusercontent.com/aidoop/factory-install/master/aidoop-r/tsconfig-base.json
+fi
+
 chmod u+x start.sh
 chmod u+x stop.sh
 chmod u+x upgrade.sh
