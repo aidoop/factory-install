@@ -83,7 +83,8 @@ module.exports = {
       markerOffsetCalibrator: {
         program: [
           "python3",
-          "/app/object-tracker-python/object_tracker/objecttracking_engine.py",
+          "/app/object-tracker-python/object_tracker/objtracking_entry.py",
+          "OBJTRACKING",
         ],
       },
     },
