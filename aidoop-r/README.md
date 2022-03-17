@@ -30,6 +30,13 @@
   ```
 - run 'start.sh' to start aidoop-r and 'stop.sh' to stop the running applicaton.
 
+### Login Preset ID/Password
+
+```
+ID: admin@ai-doop.com
+PW: admin
+```
+
 ### Before first application run
 - should run 'migrate.sh' first to migrate database.
 - Please run the following scripts sequentially
