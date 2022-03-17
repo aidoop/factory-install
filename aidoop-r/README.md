@@ -1,44 +1,50 @@
-## aidoop-r
+## AIdoop-r
 
-- aidoop : Solution family brand of ai-doop.com(http://www.ai-doop.com)
+- AIdoop : Solution family brand of ai-doop.com(http://www.ai-doop.com)
 - r : Robotics (Robot Automation Solution)
 
-## prerequisites
+## Prerequisites
 
-- nodejs version 14
+- need the docker engine to install 
+### Install Docker Engine
+- please refer to the following link and install the docker engine
+- https://docs.docker.com/engine/install/
 
-## install from docker
 
-- aidoop-r installation script
+## Install AIdoop-R from docker
 
-  - create a folder for the application and change directory to your folder.
-  - the script will download & install aidoop-r
+### AIdoop-r installation script
 
-    ```bash
-    # install normal aidoop-r 
-    curl -fsSL https://raw.githubusercontent.com/aidoop/factory-install/master/aidoop-r/install.sh | bash -s
-    ```
-  - the script will download & install aidoop-r for china
-
-    ```bash
-    # install normal aidoop-r for china
-    curl -fsSL https://raw.githubusercontent.com/aidoop/factory-install/master/aidoop-r/install-cn.sh | bash -s
-    ```
-
-  - run 'start.sh' to start aidoop-r and 'stop.sh' to stop the running applicaton.
-  - on initial start, run 'migrate.sh' first to migrate database.
+- create a folder for the application and change directory to your folder.
+- the script will download & install aidoop-r
 
   ```bash
-  # data migration
-  $ ./start.sh
-  $ ./migrate.sh
-  $ ./stop.sh
-
-  # restart with service port no.
-  $ ./start.sh 80
+  # install normal aidoop-r 
+  curl -fsSL https://raw.githubusercontent.com/aidoop/factory-install/master/aidoop-r/install.sh | bash -s
   ```
+- the script will download & install aidoop-r for china
 
-## to use usb camera & display of host
+  ```bash
+  # install normal aidoop-r for china
+  curl -fsSL https://raw.githubusercontent.com/aidoop/factory-install/master/aidoop-r/install-cn.sh | bash -s
+  ```
+- run 'start.sh' to start aidoop-r and 'stop.sh' to stop the running applicaton.
+
+### Before first application run
+- should run 'migrate.sh' first to migrate database.
+- Please run the following scripts sequentially
+
+```bash
+# data migration
+$ ./start.sh
+$ ./migrate.sh
+$ ./stop.sh
+
+# restart with service port no.  
+$ ./start.sh 80
+```
+
+## Use usb camera & display of host
 
 - limited to linux host like Ubunut
 - uncomment the lines below **'# usb & display access for linux'** in docker-compose.yml as the following
@@ -59,7 +65,7 @@
   ```
 
 
-## aidoop-r license file
+## Use AIdoop-r license file
 
 - need a license file named **'license.json'** to run aidoop-r without any license issue
 - For a license file, please contact the license manager(jinwon@ai-doop.com)
