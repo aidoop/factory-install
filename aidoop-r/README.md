@@ -67,5 +67,5 @@ $ ./start.sh 80
 
 ## Use AIdoop-r license file
 
-- need a license file named **'license.json'** to run aidoop-r without any license issue
-- For a license file, please contact the license manager(jinwon@ai-doop.com)
+- rename your license file **'license.json'** to run aidoop-r without any license issue
+- For a license file, please contact the license manager (jinwon@ai-doop.com)
