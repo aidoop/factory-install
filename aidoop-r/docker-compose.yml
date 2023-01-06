@@ -8,7 +8,7 @@ services:
       - app
   app:
     container_name: aidoop-r
-    image: aidoop/aidoop-r:5.1.1
+    image: aidoop/aidoop-r:latest
     privileged: true
     volumes:
       - ./logs:/app/logs
