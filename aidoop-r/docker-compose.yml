@@ -25,6 +25,7 @@ services:
     depends_on:
       - postgres
       - mosquitto
+      - scheduler
   postgres:
     image: postgres:13.2
     container_name: db-aidoop-r
@@ -41,3 +42,10 @@ services:
     ports:
       - 1883:1883
       - 9001:9001
+  scheduler:
+    image: hatiolab/schevt-mgr:latest
+    container_name: scheduler
+    volumes:
+      - ./config.yaml:/app/config.yaml
+    ports:
+      - '9902:9902'

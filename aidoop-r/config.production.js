@@ -55,6 +55,18 @@ module.exports = {
     synchronize: true,
     logging: true,
   },
+  scheduler: {
+    /* Name to be used for setting client's "application" properties when registering a schedule */
+    application: "aidoop-r",
+    /* Base endpoint to be used for setting "callback" properties when registering a schedule */
+    callbackBase: "http://app:3000",
+    /* 
+        Scheduler service endpoint
+        caution) endpoint for "localhost" has some problem. 
+        https://github.com/node-fetch/node-fetch/issues/1624
+      */
+    endpoint: "http://scheduler:9902",
+  },
   vision: {
     streamingPort: 3001,
     camera: {
