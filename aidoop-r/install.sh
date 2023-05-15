@@ -54,6 +54,13 @@ else
   curl -O https://raw.githubusercontent.com/aidoop/factory-install/master/aidoop-r/tsconfig-base.json
 fi
 
+if [ -f "scheduler-config.yaml" ] ; then
+  echo "scheduler-config.yaml exist"
+else
+  echo "scheduler-config.yaml create"
+  curl -O https://raw.githubusercontent.com/aidoop/factory-install/master/aidoop-r/scheduler-config.yaml
+fi
+
 chmod u+x start.sh
 chmod u+x stop.sh
 chmod u+x upgrade.sh

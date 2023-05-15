@@ -46,6 +46,6 @@ services:
     image: hatiolab/schevt-mgr:latest
     container_name: scheduler
     volumes:
-      - ./config.yaml:/app/config.yaml
+      - ./scheduler_config.yaml:/app/config.yaml
     ports:
       - '9902:9902'
